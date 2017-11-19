@@ -199,8 +199,10 @@ class App extends Component {
       return <p>Storage Levels are Good</p>
     if (percentCalc >= 95)
       return <p>Storage levels are close to full</p>
-    else
+    if (percentCalc > 60 && percentCalc <= 65)
       return <p>Storage levels are close to Empty</p>
+    else
+      return <p>Storage levels are close to Critically Empty</p>
 
 
   }
