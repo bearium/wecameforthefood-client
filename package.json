@@ -4,5 +4,15 @@
   "main": "index.js",
   "repository": "https://github.com/macdja38/wecameforthefood-client.git",
   "author": "bearium <jacob_martin@rogers.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  },
+  "devDependencies": {
+    "grunt": "^1.0.1",
+    "grunt-contrib-less": "^1.4.1",
+    "grunt-contrib-watch": "^1.0.0",
+    "less-plugin-autoprefix": "^1.5.1",
+    "less-plugin-clean-css": "^1.5.1"
+  }
 }

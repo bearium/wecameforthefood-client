@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+function getlist() {
+  return Promise.resolve([{id: "fdjsaf", date: 32432423}, {id: "fdjsaf", date: 32432423}])
+
+}
+
+
+
+
+
 class App extends Component {
   render() {
     return (
@@ -13,7 +22,27 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <table border="1">
+        <tbody>
+        <tr>
+        <td>Item</td>
+        <td>Price</td>
+        <td>Volume</td>
+        <td>Expiry Date</td>
+        </tr>
+        </tbody>
+        </table>
+
+
+
+
+
+
+
+
       </div>
+
     );
   }
 }
