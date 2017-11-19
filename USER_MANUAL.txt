@@ -1,31 +1,33 @@
 User manual things
 
-INSTALLATION
-TODO: Add instructions
+REQUIREMENTS:
+Modern web browser which supports HTML5 - The latest version of Mozilla Firefox, Google Chrome, Microsoft Edge,
+Safari or Android Browser is suggested.
+Javascript must be enabled.
+
+HOW TO USE
+1) Open a web browser
+2) Enter in the website "http://www.wecameforthefood.me"
+3) The interface will appear, details on use follow
+
+USER INTERFACE
+Items in the container are displayed in a table in the centre of the screen. 
+
+There is a button on the top right of the table labeled "Add Item" which will show entry boxes to define an item.
+After filling in all the entry boxes, press the Submit button to enter the item into the database.
+If the entry is not acceptable, an error message will appear. 
+Reasons why an item can be rejected include:
+-Invalid Size (not enough space available, negative value)
+-Invalid Cost (negative value)
+-Unfilled entry
+
+At the far right of each row there is a button labeled 'Delete Item' which will remove the item specified by that row.
+A popup message will appear to confirm the delete action. A delete action will only be rejected if the object no longer exists.
+
+At the bottom right, below the item table, is a smaller table detailing the total number of items in the table, total size of items in the table, 
+percent of total capacity filled, and cost of items in the table.
 
 
-
-
-
-
-
-
-Item Input
-
-
-Item Display
-Items in the container are displayed in a table. The items can be sorted by clicking the table headers.
-
-There is a button on the top right of the table with a '+' sign which will show entry boxes to define an item.
-All entry boxes must be filled, otherwise the entry will be rejected and a warning popup will appear.
-
-At the far right of each row there is a button with a '-' sign which will remove the item specified by that row.
-A popup message will appear, to confirm the delete action.
-
-
-
-Limitations
-- ? (None yet)
 
 
 
