@@ -33,6 +33,11 @@ function deleteItem(id) {
   });
 }
 
+function getCosts() {
+  return fetch(`${api}status`)
+}
+
+
 /**
  * seconds to time
  * @author macdja38
@@ -248,8 +253,8 @@ class App extends Component {
           <tbody>
           <tr>
             <td>Item</td>
-            <td>Price</td>
-            <td>Volume</td>
+            <td>Price ($)</td>
+            <td>Volume(m cube)</td>
             <td>Expiry Date</td>
             <td>Remove Item</td>
           </tr>
@@ -262,15 +267,19 @@ class App extends Component {
           <tbody>
           <tr>
             <td>Total Items</td>
-            <td>Total space</td>
-            <td>Space used</td>
-            <td>total cost</td>
+            <td>Total space(m cubed)</td>
+            <td>Space used(%)</td>
+            <td>total cost($)</td>
+            <td>Cost per month($)</td>
+            <td>Cost per year($)</td>
           </tr>
           <tr>
             <td>{this.state.list.length}</td>
             <td>{calcSpace(this.state.list)}</td>
             <td>{percentCalc}</td>
             <td>{calcCost(this.state.list)}</td>
+            <td>{getCosts().month}</td>
+            <td>{getCosts().year}</td>
           </tr>
           </tbody>
         </table>
