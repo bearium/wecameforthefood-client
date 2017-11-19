@@ -1,6 +1,8 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+
+import SweetAlert from 'sweetalert-react';
 
 let api = "http://wecameforthefood.me/api/";
 
@@ -26,7 +28,7 @@ function deleteItem(id) {
       "Accept": "application/json, test/plain, */*",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({id}),
+    body: JSON.stringify({ id }),
   }).then(console.log).catch(console.error);
 }
 
@@ -56,7 +58,14 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {list: [], addItem: false, tempItem: {name: "", price: 0, size: 0, expire: 0}};
+    this.state = {
+      list: [],
+      addItem: false,
+      sweetShow: false,
+      sweetText: "",
+      sweetTitle: "",
+      tempItem: { name: "", price: 0, size: 0, expire: 0 },
+    };
     this.addItem = this.addItem.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -71,7 +80,7 @@ class App extends Component {
 
   updateList() {
     getList().then((list) => {
-      this.setState({list: list})
+      this.setState({ list: list })
     })
   }
 
@@ -93,13 +102,13 @@ class App extends Component {
       name: this.state.tempItem.name,
       price: (this.state.tempItem.price),
       size: this.state.tempItem.size,
-      expire: this.state.tempItem.expire
+      expire: this.state.tempItem.expire,
     }
   }
 
   handleChange(prop) {
     return (event) => {
-      this.setState({tempItem: Object.assign({}, this.state.tempItem, {[prop]: event.target.value})});
+      this.setState({ tempItem: Object.assign({}, this.state.tempItem, { [prop]: event.target.value }) });
     };
   }
 
@@ -115,7 +124,7 @@ class App extends Component {
   }
 
   addItem() {
-    this.setState({addItem: !this.state.addItem})
+    this.setState({ addItem: !this.state.addItem })
   }
 
   warnings(percentCalc) {
@@ -142,7 +151,7 @@ class App extends Component {
 
 
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo"/>
+          <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">LUNAR STORAGE</h1>
         </header>
 
@@ -157,15 +166,15 @@ class App extends Component {
 
           <form onSubmit={this.handleSubmit}>
             Item:
-            <input type="text" name="item" value={this.state.tempItem.name} onChange={this.handleChange("name")}/>
+            <input type="text" name="item" value={this.state.tempItem.name} onChange={this.handleChange("name")} />
             Price:
-            <input type="number" name="price" value={this.state.tempItem.price} onChange={this.handleChange("price")}/>
+            <input type="number" name="price" value={this.state.tempItem.price} onChange={this.handleChange("price")} />
             Size:
-            <input type="number" name="Size" value={this.state.tempItem.size} onChange={this.handleChange("size")}/>
+            <input type="number" name="Size" value={this.state.tempItem.size} onChange={this.handleChange("size")} />
             Expiry Date:
             <input type="text" name="Expiry Date" value={this.state.tempItem.expire}
-                   onChange={this.handleChange("expire")}/>
-            <input type="submit" value="Submit"/>
+                   onChange={this.handleChange("expire")} />
+            <input type="submit" value="Submit" />
           </form>
           : ""
         }
@@ -201,7 +210,14 @@ class App extends Component {
           </tbody>
         </table>
 
-
+        <div>
+          <SweetAlert
+            show={this.state.sweetShow}
+            title={this.state.sweetTitle}
+            text={this.state.sweetText}
+            onConfirm={() => this.setState({ sweetShow: false })}
+          />
+        </div>
       </div>
 
     );
