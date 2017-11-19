@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import './App.css';
 
 import SweetAlert from 'sweetalert-react';
+import './vendor/sweetalert.css';
 
 let api = "http://wecameforthefood.me/api/";
 
@@ -29,7 +30,7 @@ function deleteItem(id) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ id }),
-  }).then(console.log).catch(console.error);
+  });
 }
 
 /**
@@ -62,16 +63,17 @@ class App extends Component {
       list: [],
       addItem: false,
       sweetShow: false,
+      sweetIcon: "warning",
       sweetText: "",
       sweetTitle: "",
-      tempItem: { name: "", price: 0, size: 0, expire: 0 },
+      tempItem: { name: "", price: 0, size: 0, expire: "1 day" },
     };
     this.addItem = this.addItem.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.updateList = this.updateList.bind(this);
-    this.displayErrorResponse = this.displayErrorResponse.bind(this);
     this.createRow = this.createRow.bind(this);
+    this.handleApiResponse = this.handleApiResponse.bind(this);
   }
 
   componentDidMount() {
@@ -92,7 +94,7 @@ class App extends Component {
         <td>{item.size}</td>
         <td>{item.expire}</td>
         <td>
-          <button type="button" onClick={() => deleteItem(item.id)}>delete item</button>
+          <button type="button" onClick={() => this.handleApiResponse(deleteItem(item.id))}>delete item</button>
         </td>
       </tr>);
   }
@@ -106,19 +108,31 @@ class App extends Component {
     }
   }
 
+  handleApiResponse(response) {
+    response.then(r => {
+      if (r.status === 400) {
+        throw r.text();
+      }
+      this.updateList();
+    }).catch(text => {
+      console.log(text);
+      if (text.then) {
+        text.then(errorMsg => {
+          this.setState({ sweetShow: true, sweetTitle: "Invalid Input", sweetText: errorMsg });
+        })
+      }
+    });
+  }
+
   handleChange(prop) {
     return (event) => {
       this.setState({ tempItem: Object.assign({}, this.state.tempItem, { [prop]: event.target.value }) });
     };
   }
 
-  displayErrorResponse(error) {
-    console.error(error);
-  }
-
   handleSubmit(event) {
     console.log(this.subItem());
-    addItem(this.subItem()).catch(this.displayErrorResponse).then(this.updateList);
+    this.handleApiResponse(addItem(this.subItem()));
     this.addItem();
     event.preventDefault();
   }
@@ -212,6 +226,7 @@ class App extends Component {
 
         <div>
           <SweetAlert
+            icon={this.state.sweetIcon}
             show={this.state.sweetShow}
             title={this.state.sweetTitle}
             text={this.state.sweetText}
