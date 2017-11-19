@@ -212,6 +212,7 @@ class App extends Component {
       <div className="App">
 
 
+
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">LUNAR STORAGE</h1>
@@ -222,7 +223,8 @@ class App extends Component {
         </p>
 
 
-        <button type="button" onClick={this.addItem}>Add item</button>
+        <button type="button" onClick={this.addItem} >Add Item</button>
+
 
         {this.state.addItem ?
 
@@ -242,20 +244,21 @@ class App extends Component {
         }
 
 
-        <table border="1">
+        <table border="1" align={"center"} id = "customers">
           <tbody>
           <tr>
             <td>Item</td>
             <td>Price</td>
             <td>Volume</td>
             <td>Expiry Date</td>
+            <td>Remove Item</td>
           </tr>
 
           {this.state.list.map(this.createRow)}
           </tbody>
         </table>
 
-        <table border="1">
+        <table border="1" align={"right"} id = "customers">
           <tbody>
           <tr>
             <td>Total Items</td>
