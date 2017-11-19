@@ -130,12 +130,16 @@ class App extends Component {
   }
 
   componentDidMount() {
+    setInterval(this.updateList, 1000);
     this.updateList();
   }
 
   updateList() {
     getList().then((list) => {
       this.setState({ list: list })
+    });
+    getCosts().then(({year, month}) => {
+      this.setState({year, month});
     })
   }
 
@@ -280,8 +284,8 @@ class App extends Component {
             <td>{calcSpace(this.state.list)}</td>
             <td>{percentCalc}</td>
             <td>{calcCost(this.state.list)}</td>
-            <td>{getCosts().month}</td>
-            <td>{getCosts().year}</td>
+            <td>{this.state.month}</td>
+            <td>{this.state.year}</td>
           </tr>
           </tbody>
         </table>
