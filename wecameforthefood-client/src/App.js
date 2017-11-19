@@ -21,16 +21,26 @@ function createRow(item) {
 
 
 class App extends Component {
+
   constructor(props) {
     super(props);
 
-    this.state = {list: []}
+    this.state = {list: [],addItem : false, tempItem: {name:"", price:0, }};
+    this.addItem = this.addItem.bind(this);
   }
 
   componentDidMount() {
     getList().then((list) => {
       this.setState({list: list})
+
     })
+  }
+
+  addItem() {
+    this.setState({addItem: !this.state.addItem})
+  }
+  subItem(){
+
   }
 
   render() {
@@ -43,6 +53,26 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+
+        <button type="button" onClick={this.addItem}>Add item</button>
+
+        {this.state.addItem ?
+
+          <form action="">
+            Iteam:
+            <input type="text" name="item" value=""/>
+            Price:
+            <input type="text" name="price" value=""/>
+            Size:
+            <input type="text" name="Size" value=""/>
+            Expiry Date:
+            <input type="text" name="Expiry Date" value=""/>
+            <input type="submit" value="Submit"/>
+          </form>
+          : ""
+        }
+
+
 
         <table border="1">
           <tbody>
