@@ -34,6 +34,54 @@ function deleteItem(id) {
 }
 
 /**
+ * seconds to time
+ * @author macdja38
+ * @param secs
+ * @returns {string}
+ */
+function secondsToTime(secs) {
+  secs = Math.round(secs);
+
+  let days = Math.floor(secs / (60 * 60 * 24));
+
+  let divisor_for_hours = secs % (24 * 60 * 60);
+  let hours = Math.floor(divisor_for_hours / (60 * 60));
+
+  let divisor_for_minutes = secs % (60 * 60);
+  let minutes = Math.floor(divisor_for_minutes / 60);
+
+  let divisor_for_seconds = divisor_for_minutes % 60;
+  let seconds = Math.ceil(divisor_for_seconds);
+  if (days > 0) {
+    return days + " Day" + s(days) + " and " + hours + " Hour" + s(hours);
+  }
+  else if (hours > 0) {
+    return hours + " Hour" + s(hours) + " and " + minutes + " Minute" + s(minutes);
+  }
+  else if (minutes > 0) {
+    return minutes + " Minute" + s(minutes) + " and " + seconds + " Second" + s(seconds);
+  }
+  else {
+    return seconds + " Second" + s(seconds);
+  }
+}
+
+/**
+ * returns s if seconds is greater than one.
+ * @param {number} v
+ * @returns {string}
+ * @private
+ */
+function s(v) {
+  return (v > 1) ? "s" : "";
+}
+
+function getTimeTill(expire) {
+  let diff = Date.parse(expire) - Date.now();
+  return secondsToTime(diff / 1000);
+}
+
+/**
  *
  * @param {Array<Object>} list
  */
@@ -92,7 +140,7 @@ class App extends Component {
         <td>{item.name}</td>
         <td>{item.price}</td>
         <td>{item.size}</td>
-        <td>{item.expire}</td>
+        <td>{getTimeTill(item.expire)}</td>
         <td>
           <button type="button" onClick={() => this.handleApiResponse(deleteItem(item.id))}>delete item</button>
         </td>
