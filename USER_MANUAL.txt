@@ -11,13 +11,16 @@ TODO: Add instructions
 
 
 Item Input
-All entry boxes must be filled, otherwise the entry will be rejected and a warning popup will appear.
+
 
 Item Display
 Items in the container are displayed in a table. The items can be sorted by clicking the table headers.
-There is a button on the top right of the table with a '+' sign which will open the interface to insert an item.
-At the far right of each row there is a button with a '-' sign which will remove the item specified by that row.
 
+There is a button on the top right of the table with a '+' sign which will show entry boxes to define an item.
+All entry boxes must be filled, otherwise the entry will be rejected and a warning popup will appear.
+
+At the far right of each row there is a button with a '-' sign which will remove the item specified by that row.
+A popup message will appear, to confirm the delete action.
 
 
 
